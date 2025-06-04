@@ -7,7 +7,7 @@ import nntile.functions as nntf
 from nntile.layer.base_layer import BaseLayer
 from nntile.tensor import Tensor, TensorMoments, TensorTraits
 from typing import List, Union
-import torch
+import torch  
 import torch.nn as nn
 
 import numpy as np
