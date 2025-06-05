@@ -1,30 +1,52 @@
-# Implementation-of-Diffusion-Transformer-within-NNTile-Machine-Learning-Framework
+# Implementation of Diffusion Transformer within NNTile Machine Learning Framework
+
+Efficient CPU-based Diffusion Transformer implemented in the NNtile framework (built on STARPU), optimized for scalable, high-fidelity generative modeling. Benchmarked against PyTorch and Hugging Face implementations. The roadmap includes a modular training pipeline, a flexible generation pipeline, and scalability testing for larger models and datasets.
+
+---
 
 ## 📅 Roadmap
 
-Efficient CPU-based Diffusion Transformer in NNtile (on STARPU), optimized for scalable, high-fidelity generative modeling. Benchmarked against PyTorch and Hugging Face. Roadmap includes training and generation pipelines, plus scalability testing for larger models and datasets.
+This research is ongoing. Currently, we have implemented the core components of the Diffusion Transformer within NNTile using Python wrapper constructors — both **without random generators** and **with random generators**.
 
-The research is on-going and currently, we have implemented the components of Diffusion Transformer within NNTile using the Python-wrapper constructors without random generators and subsequently with random-generators.
+### Next milestones:
+- ✅ Validate DiT-Block components against Hugging Face’s PyTorch reference using relative error metrics
+- 🔜 Develop and integrate the **generation pipeline**
+- 🔜 Build a robust **training pipeline**
+- 🔜 Conduct **scalability testing** to support at least 4× model growth on equivalent hardware
+- 🎯 Final goal: minimize **FID score** and enhance generative image quality
 
-#### 📊 Benchmarks
+---
 
-Tests scripts exists for both the implementations using the Python-wrapper constructors without random generators and with random-generators.
+## 📊 Benchmarks
 
-WE COMPARE the DiT-Block implementations for Hugging-Face Pytorch againsts NNTile implementations based on relative error and accuracy.
+Test scripts are available for both implementations — those using constructors without random generators and those with them.
 
-Further steps includes scalability tests, writing generation pipeline and training pipeline with the goal of scaling diffusion transformer so as to reduce the FID score and improve image generation quality.
+We compare NNTile-based Diffusion Transformer (DiT) blocks against Hugging Face’s PyTorch-based DiT using:
+- ✅ Forward and backward **relative error**
+- ✅ **Accuracy alignment** checks
+- 🔍 Component-wise comparisons (e.g., MLP, MHSA, AdaLN-Zero)
+
+Future benchmark directions:
+- Performance profiling
+- FID tracking on standard datasets
+- Scaling trends
+
+---
 
 ## 📖 Citation
 
-@misc {nntile2023,
-  author       = {Aleksandr Mikhalev , Aleksandr Katrutsa , Konstantin Sozykin , Gleb Karpov , Daniel Bershatsky}, 
+Please cite the following repositories and frameworks if you use this work in your research:
+
+```bibtex
+@misc{nntile2023,
+  author       = {Aleksandr Mikhalev, Aleksandr Katrutsa, Konstantin Sozykin, Gleb Karpov, Daniel Bershatsky},
   title        = {NNTile: Task-based Machine Learning Framework},
   year         = {2023},
   howpublished = {\url{https://github.com/nntile/nntile}},
   note         = {Accessed: 2025-04-21}
 }
 
-@misc {huggingface2024,
+@misc{huggingface2024,
   author       = {Hugging Face},
   title        = {Diffusers Library: DiT Transformer 2D Model},
   year         = {2024},
@@ -32,10 +54,12 @@ Further steps includes scalability tests, writing generation pipeline and traini
   note         = {Accessed: 2025-04-21}
 }
 
-## 📬 Contact
 
-Email: udobangjoshua@gmail.com
+📬 Contact
+📧 Email: udobangjoshua@gmail.com
 
-LinkedIn: https://www.linkedin.com/in/joshua-udobang-a852b1129?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+🔗 LinkedIn: Joshua Udobang
+
+For questions, feedback, or collaboration, feel free to open a GitHub issue or start a discussion in the repo
 
 For questions, feel free to reach out via GitHub Issues or open a discussion in the repo.
