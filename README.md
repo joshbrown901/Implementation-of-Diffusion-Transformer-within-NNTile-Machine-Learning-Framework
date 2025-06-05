@@ -56,6 +56,7 @@ Please cite the following repositories and frameworks if you use this work in yo
 
 
 📬 Contact
+
 📧 Email: udobangjoshua@gmail.com
 
 🔗 LinkedIn: Joshua Udobang
@@ -63,3 +64,7 @@ Please cite the following repositories and frameworks if you use this work in yo
 For questions, feedback, or collaboration, feel free to open a GitHub issue or start a discussion in the repo
 
 For questions, feel free to reach out via GitHub Issues or open a discussion in the repo.
+
+🙏 Acknowledgement
+
+I would like to thank Professor Aleksandr Mikhalev for the opportunity to be a part of this ongoing research, and for the guidance and support in contributing to and utilizing the task-based parallelism paradigm NNTile.
