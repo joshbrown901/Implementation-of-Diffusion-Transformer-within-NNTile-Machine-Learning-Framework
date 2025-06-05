@@ -35,9 +35,6 @@ Future benchmark directions:
 
 ## 📖 Citation
 
-Please cite the following repositories and frameworks if you use this work in your research:
-
-```bibtex
 @misc{nntile2023,
   author       = {Aleksandr Mikhalev, Aleksandr Katrutsa, Konstantin Sozykin, Gleb Karpov, Daniel Bershatsky},
   title        = {NNTile: Task-based Machine Learning Framework},
@@ -54,17 +51,14 @@ Please cite the following repositories and frameworks if you use this work in yo
   note         = {Accessed: 2025-04-21}
 }
 
-
-📬 Contact
+## 📬 Contact
 
 📧 Email: udobangjoshua@gmail.com
 
 🔗 LinkedIn: Joshua Udobang
 
-For questions, feedback, or collaboration, feel free to open a GitHub issue or start a discussion in the repo
-
 For questions, feel free to reach out via GitHub Issues or open a discussion in the repo.
 
-🙏 Acknowledgement
+## 🙏 Acknowledgement
 
 I would like to thank Professor Aleksandr Mikhalev for the opportunity to be a part of this ongoing research, and for the guidance and support in contributing to and utilizing the task-based parallelism paradigm NNTile.
