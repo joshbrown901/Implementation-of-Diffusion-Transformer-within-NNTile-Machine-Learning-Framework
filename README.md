@@ -6,9 +6,9 @@ Efficient CPU-based Diffusion Transformer implemented in the NNtile framework (b
 
 ## Setup
 Run the code on NNTile Docker Image below
-'''bash
+```bash
 docker pull ghcr.io/nntile/nntile:1.1.0-starpu1.4.7-cuda12.4.0-ubuntu22.04
-'''
+```
 ## 📅 Roadmap
 
 This research is ongoing. Currently, we have implemented the core components of the Diffusion Transformer within NNTile using Python wrapper constructors — both **without random generators** and **with random generators**.
