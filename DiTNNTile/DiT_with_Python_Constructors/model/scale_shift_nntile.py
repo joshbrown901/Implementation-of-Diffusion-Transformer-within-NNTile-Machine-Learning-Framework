@@ -28,8 +28,13 @@ class ScaleShiftNNTile:
         self.shift = shift
         self.shift_nnt = nntc.from_array(self.shift)
         nntf.add_slice_async(1.0, self.scale_nnt, 1.0, self.tmp, self.scale_new, 1)
+        self.scale_nnt.wont_use()
+        self.tmp.wont_use()
         nntf.prod_inplace_async(self.x_nnt, self.scale_new)
+        self.x_nnt.wont_use()
         nntf.add_slice_async(1.0, self.shift_nnt, 1.0, self.scale_new, self.y_nnt, 1)
+        self.shift_nnt.wont_use()
+        self.scale_new.wont_use()
         return nntc.to_numpy(self.y_nnt)
 
     def backward(self, grad_y):
