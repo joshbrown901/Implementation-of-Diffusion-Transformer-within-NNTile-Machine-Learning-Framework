@@ -29,8 +29,14 @@ class ScalePlusSkipConnectionNNTile:
         self.shift = shift
         self.shift_nnt = nntc.from_array(self.shift)
         nntf.add_slice_async(1.0, self.scale_nnt, 1.0, self.tmp, self.scale_new, 1)
+        self.scale_nnt.wont_use()
+        self.tmp.wont_use()
         nntf.prod_inplace_async(self.x_nnt, self.scale_new)
+        self.x_nnt.wont_use()
         nntf.add_async(1.0, self.shift_nnt, 1.0, self.scale_new, self.y_nnt)
+        self.shift_nnt.wont_use()
+        self.scale_new.wont_use()
+        self.y_nnt.wont_use()
         return nntc.to_numpy(self.y_nnt)
 
     def backward(self, grad_y):
@@ -40,8 +46,17 @@ class ScalePlusSkipConnectionNNTile:
         self.grad_scale = nntc.zeros_like(self.scale_nnt)
         self.grad_shift = nntc.zeros_like(self.shift_nnt)
         nntf.add_slice_async(1.0, self.scale_nnt, 1.0, self.tmp, self.tmp1, 1)
+        self.scale_nnt.wont_use()
+        self.tmp.wont_use()
         nntf.prod_async(self.grad_y_nnt, self.tmp1, self.grad_x)
+        self.tmp1.wont_use()
+        self.grad_x.wont_use()
         nntf.prod_async(self.grad_y_nnt, self.x_nnt, self.grad_scale_applied)
+        self.x_nnt.wont_use()
         nntf.sum_slice_async(1.0, self.grad_scale_applied, 0.0, self.grad_scale, 1)
+        self.grad_scale_applied.wont_use()
+        self.grad_scale.wont_use()
         self.grad_shift = self.grad_y_nnt
+        self.grad_shift.wont_use()
+        self.grad_y_nnt.wont_use()
         return nntc.to_numpy(self.grad_x), nntc.to_numpy(self.grad_scale), nntc.to_numpy(self.grad_shift)
