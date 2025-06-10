@@ -13,18 +13,12 @@ from nntile.layer.layer_norm import LayerNorm
 import torch.nn.functional as F
 from mlp_nntile import MLPNNTile
 from scale_shift_nntile import ScaleShiftNNTile
-from layer_norm import manual_layer_norm
 from AdaptiveLayerNormZeroTorch import AdaptiveLayerNormZeroTorch
 from AdaptiveLayerNormZeroNNTile import AdaptiveLayerNormZeroNNTile
+from nntile.tensor import TensorMoments, to_numpy, from_array, fill_async, clear_async, sum_slice_async, norm_slice_async, hypot_scalar_inverse_async, prod_slice_async, add_slice_async, add_inplace_async, add_slice_inplace_async, sumprod_slice_async
+from nntile.layer.layer_norm import LayerNorm
+from layer_norm_noaffine_nntile import LayerNormNoAffine
 
-
-import numpy as np
-import torch
-from mlp_nntile import MLPNNTile
-from scale_shift_nntile import ScaleShiftNNTile
-from layer_norm import manual_layer_norm
-# from adaptive_layer_norm_torch import AdaptiveLayerNormZeroTorch
-# from adaptive_layer_norm_nntile import AdaptiveLayerNormZeroNNTile
 
 # Set manual seeds for reproducibility
 torch.manual_seed(0)
@@ -61,7 +55,7 @@ if emb_torch.grad is not None:
 out_torch, gate_msa_t, shift_mlp_t, scale_mlp_t, gate_mlp_t = torch_mod(x_torch, emb_torch)
 
 # Convert to numpy for comparison
-x_np = x_torch
+x_np = x_torch.detach().numpy()
 emb_np = emb_torch.detach().numpy()
 W_np = W_full.detach().numpy()
 b_np = b_full.detach().numpy()
