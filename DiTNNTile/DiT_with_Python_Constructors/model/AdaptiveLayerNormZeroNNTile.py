@@ -8,11 +8,11 @@ from nntile.layer.base_layer import BaseLayer
 from nntile.tensor import Tensor, TensorMoments, TensorTraits
 import torch
 import torch.nn as nn
-
-
+from nntile.layer.layer_norm import LayerNorm
+from layer_norm_noaffine_nntile import LayerNormNoAffine
 from mlp_nntile import MLPNNTile
 from scale_shift_nntile import ScaleShiftNNTile
-from layer_norm import manual_layer_norm
+
 
 class AdaptiveLayerNormZeroNNTile:
     def __init__(self, B, N, D, W0, W1, W2, W3, W4, W5, b0, b1, b2, b3, b4, b5, bias=True):
@@ -50,10 +50,15 @@ class AdaptiveLayerNormZeroNNTile:
         bias=True
     )
         self.shift_msa, self.scale_msa, self.gate_msa, self.shift_mlp, self.scale_mlp, self.gate_mlp = self.mlp_nntile.forward(self.emb)
-        self.norm_x = nn.LayerNorm(self.D, elementwise_affine=False, eps=1e-6)
-        self.norm_x_x = self.norm_x(self.x)
+        self.x_value = nntc.from_array(self.x)
+        self.x_grad = nntc.from_array(np.zeros_like(self.x))
+        self.x_nnt = TensorMoments(self.x_value, self.x_grad, True)
+        self.layer_norm, _ = LayerNormNoAffine.generate_simple(self.x_nnt, axis=2, eps=1e-6, redux=False, next_tag=100)
+        nntf.fill_async(1.0, self.layer_norm.gamma.value)
+        nntf.clear_async(self.layer_norm.beta.value)
+        self.layer_norm.forward_async()
         self.nntile_scale_shift = ScaleShiftNNTile(self.B, self.N, self.D)
-        self.x_out = self.nntile_scale_shift.forward(self.norm_x_x.detach().numpy(), self.scale_msa, self.shift_msa)
+        self.x_out = self.nntile_scale_shift.forward(nntc.to_numpy(self.layer_norm.y.value), self.scale_msa, self.shift_msa)
         return self.x_out, self.gate_msa, self.shift_mlp, self.scale_mlp, self.gate_mlp
 
     def backward(self, x, d_x_out, d_gate_msa, d_shift_mlp, d_scale_mlp, d_gate_mlp):
@@ -63,9 +68,9 @@ class AdaptiveLayerNormZeroNNTile:
         self.d_shift_mlp = d_shift_mlp
         self.d_scale_mlp = d_scale_mlp
         self.d_gate_mlp = d_gate_mlp
-        self.d_norm_x_x, self.d_scale_msa, self.d_shift_msa = self.nntile_scale_shift.backward(self.d_x_out)        
-        self.norm_x_x.backward(torch.tensor(self.d_norm_x_x), retain_graph=True)
-        self.d_x = self.x.grad.clone().detach().numpy()
-        self.x.grad.zero_()
+        self.d_norm_x, self.d_scale_msa, self.d_shift_msa = self.nntile_scale_shift.backward(self.d_x_out) 
+        self.layer_norm.y.grad.from_array(self.d_norm_x)
+        self.layer_norm.backward_async()
+        self.d_x = nntc.to_numpy(self.layer_norm.x.grad)
         self.d_emb, self.dW0, self.dW1, self.dW2, self.dW3, self.dW4, self.dW5, self.db0, self.db1, self.db2, self.db3, self.db4, self.db5 = self.mlp_nntile.backward(self.emb, self.d_shift_msa, self.d_scale_msa, self.d_gate_msa, self.d_shift_mlp, self.d_scale_mlp, self.d_gate_mlp)
         return self.d_x, self.d_emb
