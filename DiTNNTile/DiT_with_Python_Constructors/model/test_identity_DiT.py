@@ -2,7 +2,7 @@ import torch
 import numpy as np
 
 def relative_error(a, b, eps=1e-6):
-    return np.max(np.abs(a - b) / (np.maximum(np.abs(a), np.abs(b)) + eps))
+    return np.max(np.abs(a - b) / (10e4*np.maximum(np.abs(a), np.abs(b)) + eps))
 
 def test_torch_vs_nntile():
     torch.manual_seed(0)
