@@ -116,8 +116,6 @@ d emb: 2.39e-06
 
 
 
-
-
 Test scripts are available for both implementations — those using constructors without random generators and those with them.
 
 We compare NNTile-based Diffusion Transformer (DiT) blocks against Hugging Face’s PyTorch-based DiT using:
