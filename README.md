@@ -25,8 +25,11 @@ This research is ongoing. Currently, we have implemented the core components of 
 ## 📊 Benchmarks
 ### Results Achieved
 ### Scale and Shift
+
 PyTorch vs NumPy: NNTile vs Pytorch:
+
 Forward Relative Error: 0.0 Forward Relative Error: 0.0
+
 Grad X Relative Error: 0.0 Grad X Relative Error: 0.0
 Grad Scale Relative Error: 0.0 Grad Scale Relative Error: 2.7376e-08
 Grad Shift Relative Error: 0.0 Grad Shift Relative Error: 0.0
