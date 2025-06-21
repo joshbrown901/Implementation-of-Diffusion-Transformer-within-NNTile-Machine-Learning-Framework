@@ -23,30 +23,20 @@ This research is ongoing. Currently, we have implemented the core components of 
 ---
 
 ## 📊 Benchmarks
-
-\section{Results Achieved}
-
-\subsection{Scale and Shift}
-\begin{verbatim}
-PyTorch vs NumPy:                      NNTile vs Pytorch:
-Forward Relative Error:      0.0       Forward Relative Error:      0.0
-Grad X Relative Error:       0.0       Grad X Relative Error:       0.0
-Grad Scale Relative Error:   0.0       Grad Scale Relative Error:   2.7376e-08
-Grad Shift Relative Error:   0.0       Grad Shift Relative Error:   0.0
-\end{verbatim}
-
-\subsection{Scale and Skip-Connection}
-\begin{verbatim}
-PyTorch vs NumPy:                       NNTile vs Pytorch:
-Forward Relative Error: 0.0             Forward Relative Error: 0.0
-Grad X Relative Error: 0.0              Grad X Relative Error: 0.0
-Grad Scale Relative Error: 0.0          Grad Scale Relative Error: 2.7376e-08
-Grad Shift Relative Error: 0.0          Grad Shift Relative Error: 0.0
-\end{verbatim}
-\clearpage
-
-\subsection{MLP}
-\begin{verbatim}
+### Results Achieved
+### Scale and Shift
+PyTorch vs NumPy: NNTile vs Pytorch:
+Forward Relative Error: 0.0 Forward Relative Error: 0.0
+Grad X Relative Error: 0.0 Grad X Relative Error: 0.0
+Grad Scale Relative Error: 0.0 Grad Scale Relative Error: 2.7376e-08
+Grad Shift Relative Error: 0.0 Grad Shift Relative Error: 0.0
+### Scale and Skip-Connection
+PyTorch vs NumPy: NNTile vs Pytorch:
+Forward Relative Error: 0.0 Forward Relative Error: 0.0
+Grad X Relative Error: 0.0 Grad X Relative Error: 0.0
+Grad Scale Relative Error: 0.0 Grad Scale Relative Error: 2.7376e-08
+Grad Shift Relative Error: 0.0 Grad Shift Relative Error: 0.0
+### MLP
 shift_msa: NNTile vs NumPy error: 3.1879857e-08
 shift_msa: NNTile vs Torch error: 3.14888e-08
 scale_msa: NNTile vs NumPy error: 6.159906e-09
@@ -59,43 +49,30 @@ scale_mlp: NNTile vs NumPy error: 9.353219e-09
 scale_mlp: NNTile vs Torch error: 1.342537e-08
 gate_mlp: NNTile vs NumPy error: 1.5645409e-08
 gate_mlp: NNTile vs Torch error: 5.81201e-08
-
 Grad emb rel error (NNTile vs PyTorch): 3.002553e-08
 Grad W rel error (NNTile vs PyTorch): 1.7904173e-08
 Grad b rel error (NNTile vs Pytorch): 1.8100875e-08
-\end{verbatim}
-%\clearpage
-
-\subsection{Pointwise FeedForward Neural Network}
-\begin{verbatim}
+### Pointwise FeedForward Neural Network
 Relative errors:
-Forward                                 Backward:
-out: NumPy vs Torch: 5.76e-06           dx: NumPy vs Torch: 1.32e-06
-out: NumPy vs NNTile: 1.65e-06          dx: NumPy vs NNTile: 7.73e-06
-out: NNTile vs Torch: 5.43e-06          dx: NNTile vs Torch: 8.62e-06
-
+Forward Backward:
+out: NumPy vs Torch: 5.76e-06 dx: NumPy vs Torch: 1.32e-06
+out: NumPy vs NNTile: 1.65e-06 dx: NumPy vs NNTile: 7.73e-06
+out: NNTile vs Torch: 5.43e-06 dx: NNTile vs Torch: 8.62e-06
 Backward(cont):
-dw1: NumPy vs Torch: 1.03e-06           dw2: NumPy vs Torch: 7.31e-06
-dw1: NumPy vs NNTile: 2.98e-06          dw2: NumPy vs NNTile: 8.53e-06
-dw1: NNTile vs Torch: 3.40e-06          dw2: NNTile vs Torch: 8.17e-06
-db1: NumPy vs Torch: 5.04e-07           db2: NumPy vs Torch: 6.76e-08
-db1: NumPy vs NNTile: 3.13e-07          db2: NumPy vs NNTile: 1.45e-07
-db1: NNTile vs Torch: 4.97e-07          db2: NNTile vs Torch: 1.45e-07
-\end{verbatim}
-
-\subsection{MultiHeadSelfAttention}
-\begin{verbatim}
+dw1: NumPy vs Torch: 1.03e-06 dw2: NumPy vs Torch: 7.31e-06
+dw1: NumPy vs NNTile: 2.98e-06 dw2: NumPy vs NNTile: 8.53e-06
+dw1: NNTile vs Torch: 3.40e-06 dw2: NNTile vs Torch: 8.17e-06
+db1: NumPy vs Torch: 5.04e-07 db2: NumPy vs Torch: 6.76e-08
+db1: NumPy vs NNTile: 3.13e-07 db2: NumPy vs NNTile: 1.45e-07
+db1: NNTile vs Torch: 4.97e-07 db2: NNTile vs Torch: 1.45e-07
+### MultiHeadSelfAttention
 out: 9.602e-08
 input grad: 1.44e-07
 qkv weight: 1.30e-07
 qkv bias: 8.07e-08
 out weight: 1.522e-07
 out bias: 3.974e-08
-\end{verbatim}
-\clearpage
-
-\subsection{AdaptiveLayerNormZero}
-\begin{verbatim}
+### AdaptiveLayerNormZero
 Relative errors between Torch and NNTile implementations
 x out: 1.65e-05
 gate msa: 9.01e-08
@@ -104,7 +81,8 @@ scale mlp: 1.09e-07
 gate mlp: 4.91e-06
 d x: 2.39e-06
 d emb: 2.39e-06
-\end{verbatim}
+
+
 
 
 
