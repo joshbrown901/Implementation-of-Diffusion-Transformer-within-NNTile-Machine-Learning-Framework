@@ -114,8 +114,6 @@ d x: 2.39e-06
 
 d emb: 2.39e-06
 
-
-
 Test scripts are available for both implementations — those using constructors without random generators and those with them.
 
 We compare NNTile-based Diffusion Transformer (DiT) blocks against Hugging Face’s PyTorch-based DiT using:
@@ -124,12 +122,20 @@ We compare NNTile-based Diffusion Transformer (DiT) blocks against Hugging Face�
 - 🔍 Component-wise comparisons (e.g., MLP, MHSA, AdaLN-Zero)
 - ✅ Scalability Tests
 
-Future benchmark directions:
-- Performance profiling
-- FID tracking on standard datasets
-- Scaling trends
+![GPU Benchmark Feedforward](images/gpu_benchmark_feedforward_2.png)
 
----
+![](images/time_ratio2_feedforward.png)
+
+![GPU Benchmark AdaptiveLayerNormZero](images/gpu_benchmark_adaptivelayernormzero.png)
+
+![](images/gpu_time_ratio_adalayernormzero.png)
+
+![GPU Benchmark Identity DiT Block](images/identity_dit_gpu_benchmark.png)
+
+
+
+
+
 
 ## 📖 Citation
 
